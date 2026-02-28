@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Enquetes disponíveis</h1>
+
+{% if ultimas_questoes %}
+    <ul>
+    {% for questao in ultimas_questoes %}
+        <li><a href="{% url 'enquetes:detalhes' questao.id %}">{{ questao.texto_questao }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma enquete cadastrada ainda.</p>
+{% endif %}
+{% endblock %}

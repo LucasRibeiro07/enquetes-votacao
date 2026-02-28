@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ questao.texto_questao }}</h1>
+
+<ul>
+  {% for alternativa in questao.alternativa_set.all %}
+    <li>
+      {{ alternativa.texto_alternativa }} 
+      — <strong>{{ alternativa.votos }} voto{{ alternativa.votos|pluralize }}</strong>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'enquetes:detalhes' questao.id %}">Votar novamente?</a>
+{% endblock %}
