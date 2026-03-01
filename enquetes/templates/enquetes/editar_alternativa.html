@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Editar Alternativa</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Salvar Alterações</button>
+    <a href="{% url 'enquetes:detalhes' alternativa.questao.id %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

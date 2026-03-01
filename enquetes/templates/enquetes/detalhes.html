@@ -5,7 +5,7 @@
   {% csrf_token %}
   <fieldset>
     <legend><h1>{{ questao.texto_questao }}</h1></legend>
-    
+
     {% if error_message %}
       <p><strong>{{ error_message }}</strong></p>
     {% endif %}
@@ -18,4 +18,20 @@
   <br>
   <input type="submit" value="Votar" class="btn btn-primary">
 </form>
+
+<ul style="list-style: none; margin-top: 20px;">
+  {% for alternativa in questao.alternativa_set.all %}
+  <li style="margin-bottom: 10px;">
+    {{ alternativa.texto_alternativa }}
+    <a href="{% url 'enquetes:editar_alternativa' alternativa.id %}"
+       class="btn btn-warning btn-sm" style="margin-left: 15px;">✏️ Editar</a>
+    <form action="{% url 'enquetes:excluir_alternativa' alternativa.id %}"
+          method="post" style="display: inline;"
+          onsubmit="return confirm('Tem certeza que deseja excluir esta alternativa?')">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger btn-sm">🗑️ Excluir</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}
